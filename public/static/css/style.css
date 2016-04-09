@@ -351,7 +351,7 @@ body.dark-skin {
   height: 100px;
   margin-top: -100px;
   position: absolute;
-
+  pointer-events: all;
   text-align: center;
   top: 50%;
   width: 100%;

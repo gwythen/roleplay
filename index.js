@@ -1,19 +1,19 @@
-var nodeplayer = require('nodeplayer');
 var express = require('express');
 var app = require('express')();
 var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var ejs = require('ejs');
+var url = require('url');
 
 var settings = require('./util/Settings.js'),
-    tests = require('./util/tests.js'),
-    draw = require('./util/draw.js'),
-    projects = require('./util/projects.js'),
-    db = require('./util/db.js'),
-    paper = require('paper'),
-    async = require('async'),
-    fs = require('fs'),
-    https = require('https');
+tests = require('./util/tests.js'),
+draw = require('./util/draw.js'),
+projects = require('./util/projects.js'),
+db = require('./util/db.js'),
+paper = require('paper'),
+async = require('async'),
+fs = require('fs'),
+https = require('https');
 
 
 app.use(express.static(__dirname + '/public'));
@@ -31,8 +31,16 @@ var clientSettings = {
 
 var numUsers = 0;;
 
+// app.get('/', function(req, res){
+//   res.render('index.html', {googleDrive: settings.googleDriveFolder, audioStream: settings.audioStream});
+// });
+
 app.get('/', function(req, res){
-  res.render('index.html', {googleDrive: settings.googleDriveFolder, audioStream: settings.audioStream});
+  res.render('index.html');
+});
+app.get('/:roomName', function(req, res) {
+  res.render('board.html', {googleDrive: settings.googleDriveFolder, audioStream: settings.audioStream});
+  console.log("room is set to " + req.params.roomName);
 });
 
 
@@ -224,9 +232,3 @@ function loadFromMemory(room, socket) {
 function loadError(socket) {
   socket.emit('project:load:error');
 }
-
-// player = new nodeplayer.Core();
-
-// player.initModules(null, function() {
-// 	console.log("yeah");
-// });

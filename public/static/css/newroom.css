@@ -1,0 +1,82 @@
+body.create-room {
+  	background: url('../images/background.jpg') 0 0 no-repeat #f9f7ec; 
+  	background-size: cover;
+	height: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  	z-index: 10;
+  	margin: 0;
+  	font-family: 'Open Sans', sans-serif;
+}
+
+
+.newroom-button {
+	display: block;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+    width: 14rem;
+    padding: 0.8rem;
+    margin-top: 3rem;
+    font-size: 1.2rem;
+    border: 0;
+    border-radius: 4px;
+    border: 1px solid white;
+    color: #484848;
+    background-color: transparent;
+}
+
+/* Login Page */
+
+.create-room .form-container {
+  position: absolute;
+  pointer-events: all;
+  text-align: center;
+  top: 20%;
+  width: 100%;
+}
+
+.create-room .form {
+	width: 500px;
+    background-color: rgba(255, 255, 255, 0.7);
+    border-radius: 20px;
+    padding: 2rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.create-room .form input {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid white;
+  outline: none;
+  padding-bottom: 5px;
+  padding-top: 1rem;
+  text-align: center;
+  width: 400px;
+}
+
+.create-room .title {
+  font-size: 150%;
+  margin-bottom: 0;
+  margin-top: 2rem;
+}
+
+.create-room .main-title {
+  font-size: 200%;
+  margin-bottom: 2rem;
+  margin-top: 0;
+}
+
+.create-room input {
+  font-size: 150%;
+  letter-spacing: 3px;
+}
+
+.create-room .title, .create-room input, .create-room button {
+  color: #484848;
+  font-weight: 100;
+}

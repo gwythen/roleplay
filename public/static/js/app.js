@@ -70,8 +70,6 @@ $(document).on('click', '.icon-minim', function (e) {
     }
 });
 
-
-
   //Chat
 
   var FADE_TIME = 150; // ms
@@ -84,11 +82,11 @@ $(document).on('click', '.icon-minim', function (e) {
 
   // Initialize variables
   var $window = $(window);
-  var $usernameInput = $('.usernameInput'); // Input for username
+  var $usernameInput = $('#usernameInput'); // Input for username
   var $messages = $('.chat-messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
 
-  var $loginPage = $('.login.page'); // The login page
+  var $loginPage = $('#login'); // The login page
   var $chatPage = $('#chat'); // The chatroom page
 
   // Prompt for setting a username
@@ -309,7 +307,7 @@ $(document).on('click', '.icon-minim', function (e) {
 
   // Keyboard events
 
-  $window.keydown(function (event) {
+  $inputMessage.keydown(function (event) {
     // Auto-focus the current input when a key is typed
     if (!(event.ctrlKey || event.metaKey || event.altKey)) {
       $currentInput.focus();
@@ -325,8 +323,14 @@ $(document).on('click', '.icon-minim', function (e) {
         socket.emit('stop typing');
         typing = false;
       } else {
-        setUsername();
+        console.log("something strange's happening, a user typing without being logged in");
       }
+    }
+  });
+
+  $usernameInput.keydown(function(event) {
+    if (event.which === 13) {
+        setUsername();
     }
   });
 
