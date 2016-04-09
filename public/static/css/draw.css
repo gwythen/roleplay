@@ -1,0 +1,465 @@
+.toolbar {
+  background: #f7f7f7;
+  background: -webkit-linear-gradient(#f7f7f7, #f1f1f1 80%);
+  background: -moz-linear-gradient(#f7f7f7, #f1f1f1 80%);
+  background: -o-linear-gradient(#f7f7f7, #f1f1f1 80%);
+  background: -ms-linear-gradient(#f7f7f7, #f1f1f1 80%);
+  background: linear-gradient(#f7f7f7, #f1f1f1 80%);
+  border-bottom: 1px solid #ccc;
+  overflow: hidden;
+  padding-top: 4px;
+  width: 100%;
+  white-space: nowrap;
+  height: 32px;
+  position:absolute;
+  left:0px;
+  right:0px;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+.toolbar ul {
+  position: relative;
+  list-style: none;
+  padding-right: 3px;
+  padding-left: 1px;
+  z-index: 2;
+  overflow: hidden;
+  float: left
+}
+.toolbar ul.menu_right {
+  float: right
+}
+.toolbar ul li {
+  float: left;
+  margin-left: 2px;
+}
+.toolbar ul li.separator {
+  border: inherit;
+  background: inherit;
+  visibility: hidden;
+  width: 0px;
+  padding: 5px;
+}
+.toolbar ul li a:hover {
+  text-decoration: none;
+}
+.toolbar ul li a:hover {
+  background: #fff;
+  background: -webkit-linear-gradient(#f4f4f4, #e4e4e4);
+  background: -moz-linear-gradient(#f4f4f4, #e4e4e4);
+  background: -o-linear-gradient(#f4f4f4, #e4e4e4);
+  background: -ms-linear-gradient(#f4f4f4, #e4e4e4);
+  background: linear-gradient(#f4f4f4, #e4e4e4);
+}
+.toolbar ul li a {
+  background: #fff;
+  background: -webkit-linear-gradient(#fff, #f0f0f0);
+  background: -moz-linear-gradient(#fff, #f0f0f0);
+  background: -o-linear-gradient(#fff, #f0f0f0);
+  background: -ms-linear-gradient(#fff, #f0f0f0);
+  background: linear-gradient(#fff, #f0f0f0);
+  border: 1px solid #ccc;
+  border-radius: 3px;
+  color: #ccc;
+  cursor: pointer;
+  display: inline-block;
+  min-height: 18px;
+  overflow: hidden;
+  padding: 4px 5px;
+  text-align: center;
+  text-decoration: none;
+  min-width: 18px;
+}
+.toolbar ul li a .buttonicon {
+  position: relative;
+  top: 1px;
+}
+.toolbar ul li a.grouped-left {
+  border-radius: 3px 0 0 3px;
+}
+.toolbar ul li a.grouped-middle {
+  border-radius: 0;
+  margin-left: -2px;
+  border-left: 0;
+}
+.toolbar ul li a.grouped-right {
+  border-radius: 0 3px 3px 0;
+  margin-left: -2px;
+  border-left: 0;
+}
+#usericon a {
+  min-width: 30px;
+  text-align: left;
+}
+#usericon a #online_count {
+  color: #777;
+  font-size: 10px;
+  position: relative;
+  top: 2px;
+}
+#loading {
+  padding-top: 100px;
+  padding-bottom: 100px;
+  font-size: 2.5em;
+  color: #aaa;
+  text-align: center;
+  position: absolute;
+  width: 100%;
+  height: 30px;
+  z-index: 100;
+}
+#mycolorpicker {
+
+  position: absolute;
+  left: 250px;
+  top: 30px;
+  z-index: 101;
+  display: none;
+  border-radius: 6px;
+   
+  background-image: -ms-linear-gradient(top, #F7F7F7 0%, #FFFFFF 100%);
+   
+  background-image: -moz-linear-gradient(top, #F7F7F7 0%, #FFFFFF 100%);
+   
+  background-image: -o-linear-gradient(top, #F7F7F7 0%, #FFFFFF 100%);
+   
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(0, #F7F7F7), color-stop(1, #FFFFFF));
+   
+  background-image: -webkit-linear-gradient(top, #F7F7F7 0%, #FFFFFF 100%);
+   
+  background-image: linear-gradient(to bottom, #F7F7F7 0%, #FFFFFF 100%);
+  border: 1px solid #ccc;
+  border-top: 0;
+  padding: 10px;
+}
+#mycolorpickersave,
+#mycolorpickercancel {
+  background: #fff;
+  background: -webkit-linear-gradient(#fff, #ccc);
+  background: -moz-linear-gradient(#fff, #ccc);
+  background: -o-linear-gradient(#fff, #ccc);
+  background: -ms-linear-gradient(#fff, #ccc);
+  background: linear-gradient(#fff, #ccc);
+  border: 1px solid #ccc;
+  -webkit-border-radius: 4px;
+  -moz-border-radius: 4px;
+  border-radius: 4px;
+  font-size: 12px;
+  cursor: pointer;
+  color: #000;
+  overflow: hidden;
+  padding: 4px;
+  top: 240px;
+  text-align: center;
+  position: absolute;
+  width: 60px;
+}
+#myuser .myusernameedithoverable:hover {
+  background: white;
+  color: black;
+}
+
+#myswatchbox, #myusernameedit, #otheruserstable .swatch {
+  border: 1px solid #ccc !important;
+  color: #333;
+}
+#otheruserstable .swatch {
+  border: 1px solid #000;
+  width: 13px;
+  height: 13px;
+  overflow: hidden;
+  margin: 0 4px;
+}
+
+#connectivity .visible,
+#connectivity .visible * {
+  display: block;
+}
+
+.toolbar #overlay {
+  z-index: 500;
+  display: none;
+  background-repeat: repeat-both;
+  width: 100%;
+  position: absolute;
+  height: inherit;
+  left: 0;
+  top: 0;
+}
+
+
+#importstatusball,
+#importarrow,
+#importmessagesuccess,
+#importmessageabiword {
+  display: none;
+}
+
+#importmessageabiword {
+  color: #900;
+  font-size: small;
+}
+#importstatusball {
+  height: 50px
+}
+.buttonicon {
+  width: 16px;
+  height: 16px;
+  background-image: url('../../static/images/etherpad_lite_icons.png');
+  background-repeat: no-repeat;
+  display: inline-block;
+  vertical-align: middle;
+}
+.buttonicon-draw {
+  background-image: url('../../static/images/brush.png');
+}
+.buttonicon-pencil {
+  background-image: url('../../static/images/pencil.png');
+}
+.buttonicon-select {
+  background-image: url('../../static/images/select.png');
+}
+.buttonicon-upload {
+  background-image: url('../../static/images/upload.png');
+}
+.buttonicon-settings {
+  background-position: 0px -436px
+}
+.buttonicon-import_export {
+  background-position: 0px -68px
+}
+.buttonicon-embed {
+  background-position: 0px -18px
+}
+.buttonicon-showusers {
+  background-position: 0px -183px;
+}
+.buttonicon-zero {
+      background-image: url('../../static/images/zero.png');
+}
+.buttonicon-scale {
+    background-image: url('../../static/images/scale.png');
+}
+#online_count {
+  color: #888;
+}
+
+input[type=checkbox] {
+  vertical-align: -1px
+}
+.popup {
+  font-size: 14px;
+  width: 450px;
+  padding: 10px;
+  border-radius: 0 0 6px 6px;
+  border: 1px solid #ccc;
+  background: #f7f7f7;
+  background: -webkit-linear-gradient(#F7F7F7, #EEE);
+  background: -moz-linear-gradient(#F7F7F7, #EEE);
+  background: -ms-linear-gradient(#F7F7F7, #EEE);
+  background: -o-linear-gradient(#F7F7F7, #EEE);
+  background: linear-gradient(#F7F7F7, #EEE);
+  -webkit-box-shadow: 0 0 8px #888;
+  -moz-box-shadow: 0 0 8px #888;
+  box-shadow: 0 2px 4px #ddd;
+  color: #222;
+}
+.popup input[type=text] {
+  width: 100%;
+  padding: 5px;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  -ms-box-sizing: border-box;
+  box-sizing: border-box;
+  display: block;
+  margin-top: 10px;
+}
+.popup input[type=text], #users input[type=text] {
+  outline: none;
+}
+.popup button {
+  padding: 5px;
+  font-size: 14px;
+}
+.popup a {
+  text-decoration: none
+}
+.popup h1 {
+  color: #555;
+  font-size: 18px
+}
+.popup h2 {
+  color: #777;
+  font-size: 15px
+}
+.column {
+  float: left;
+  width: 50%;
+}
+#settings,
+#importexport,
+#embed,
+#connectivity,
+#users {
+  position: absolute;
+  top: 36px;
+  right: 20px;
+  display: none;
+  z-index: 500;
+}
+
+#canvasContainer{
+  position:absolute;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+  overflow: hidden;
+  background-repeat:no-repeat;
+  background-attachment: fixed;
+  background-position: 0px 0px;
+}
+
+@media screen and (max-width: 600px) { 
+    .toolbar ul li.separator {
+      display: none;
+    }
+    .toolbar ul li a {
+      padding: 4px 1px
+    }
+}
+@media all and (max-width: 199px){
+  #editorcontainer { 
+    top: 68px;
+  }
+  #editbar { 
+    height: 31px;
+  }
+  .toolbar ul.menu_right { 
+  }
+  .popup {
+    width:100%;
+    max-width:300px;
+    top: 72px !important;
+  }
+}
+@media only screen and (min-device-width: 320px) and (max-device-width: 720px) {
+    #users {
+      top: 36px;
+      bottom: 40px;
+      border-radius: none;
+    }
+    #mycolorpicker {
+      left: -73px;
+      ;
+    }
+    #editorcontainer {
+      margin-bottom: 33px
+    }
+    #canvasContainer {
+      bottom: 32px;
+    }
+    .toolbar ul.menu_right {
+      background: #f7f7f7;
+      background: -webkit-linear-gradient(#f7f7f7, #f1f1f1 80%);
+      background: -moz-linear-gradient(#f7f7f7, #f1f1f1 80%);
+      background: -o-linear-gradient(#f7f7f7, #f1f1f1 80%);
+      background: -ms-linear-gradient(#f7f7f7, #f1f1f1 80%);
+      background: linear-gradient(#f7f7f7, #f1f1f1 80%);
+      width: 100%;
+      overflow: hidden;
+      height: 32px;
+      position: fixed;
+      bottom: 0;
+      border-top: 1px solid #ccc;
+    }
+    .toolbar ul.menu_right > li:last-child {
+      float: right;
+    }
+    .toolbar ul.menu_right > li a {
+      border-radius: 0;
+      border: none;
+      background: none;
+      margin: 0;
+      padding: 8px;
+    }
+    .toolbar ul li a.selected {
+      background: none !important
+    }
+    #chaticon {
+      display: none !important
+    }
+    .popup {
+      -webkit-border-radius: 0;
+      -moz-border-radius: 0;
+      border-radius: 0;
+      -webkit-box-sizing: border-box;
+      -moz-box-sizing: border-box;
+      -ms-box-sizing: border-box;
+      box-sizing: border-box;
+      width: 100%;
+    }
+    #settings,
+    #importexport,
+    #connectivity,
+    #embed {
+      left: 0;
+      top: 0;
+      bottom: 33px;
+      right: 0;
+    }
+    #online_count {
+      line-height: 24px
+    }
+}
+
+#lostConnection{
+  display:none;
+}
+
+#opacity{
+  position:relative;
+}
+
+#opacityRangeVal{
+  width:100%;
+}
+
+#opacityLabel {
+  margin-bottom:10px;
+  font-size:14px;
+  margin-right:20px;
+}
+
+#imageInput{
+  display:none;
+}
+
+#colorpickerMover{
+  background-color:lightGrey;
+  height:5px;
+  padding-bottom:5px;
+  padding-top:5px;
+  border-bottom: solid 1px darkgrey;
+  border-top: solid 1px darkgrey;
+  margin-bottom:5px;
+  cursor:move;
+}
+
+#myCanvas{
+  position:absolute;
+  cursor:hand;
+  top:0px;
+  left:0px;
+  right:0px;
+  bottom:0px;
+}
+
+.whiteBG{
+  background-color:#fff;
+}
+

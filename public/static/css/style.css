@@ -1,0 +1,406 @@
+* { 
+	margin: 0; 
+	padding: 0; 
+	box-sizing: border-box;
+}
+
+*:focus {
+  outline-color: transparent;
+  outline-style: none;
+}
+
+html, 
+body {min-height:100%; padding:0; margin:0;}
+
+body { 
+	font: 13px Helvetica, Arial; 
+}
+
+body.scroll-skin {
+  background: url('../images/page-background.jpg') 0 0 repeat #f9f7ec; 
+}
+
+body.dark-skin {
+  background-color: black;
+}
+
+#wrapper {
+	padding:45px 0 0 0; 
+	position:absolute; 
+	top:0; 
+	bottom:0; 
+	left:0; 
+	right:0;
+  overflow: hidden;
+}
+
+#content {
+	min-height:100%;
+	position: relative;
+}
+
+
+#header {
+    margin-top: -45px;
+    height: 45px;
+    z-index:10;
+    position: absolute;
+    width: 100%;
+}
+
+.scroll-skin #header {
+    background: url('../images/header-background.png') 50% 0 no-repeat;
+    box-shadow: 1px 1px 8px 1px #BFBFBF;
+}
+
+.dark-skin #header {
+    background-color: black;
+    box-shadow: 1px 1px 8px 1px #171717;
+}
+
+#music-player {
+  display: inline-block;
+}
+
+#drive-button {
+  height: 45px;
+  width: 45px;
+  background: url('../images/backpack.png') no-repeat;
+  background-size: 65% 65%;
+  background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  margin-right: 0.5rem;
+  float: right;
+}
+
+#google-drive {
+  position: absolute;
+  right:0;
+  z-index: 3;
+  width: 300px;
+  height: 500px;
+  background-color: white;
+  transition: right 0.3s ease;
+  right: -300px;
+  background: url('../images/page-background.jpg') 0 0 repeat #f9f7ec;
+}
+
+#google-drive.open {
+  right: 0;
+}
+
+
+#chat {
+    width: 350px;
+    position: absolute;
+    bottom: 0;   
+    left: 5rem;
+    z-index:3;
+    
+}
+
+.scroll-skin #chat {
+    background: url('../images/page-background.jpg') 0 0 repeat #f9f7ec;
+    box-shadow: 1px 4px 5px 1px #BBBBBB;
+}
+
+.dark-skin #chat {
+    background-color: rgba(0, 0, 0, 0.52);
+    box-shadow: 1px 4px 5px 1px #000000;
+}
+
+.chat-header {
+  height: 30px;
+}
+
+.chat-header-title {
+  display: inline-block;
+  margin-left: 1rem;
+  margin-top: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.scroll-skin .chat-header-title {
+  color: #6B6969;
+}
+
+.dark-skin .chat-header-title {
+  color: white;
+}
+
+#chat input {
+    background: white;
+    bottom: 0px;
+    width: 100%;
+    border: 1px solid #DEDCD2;
+    height: 40px;
+    padding: 10px;
+}
+
+.icon-minus {
+  height: 35px;
+  width: 35px;
+  background: url('../images/minus.png') no-repeat;
+  background-size: 65% 65%;
+  background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  margin-right: 0.5rem;
+  float: right;
+}
+
+.icon-plus {
+  height: 35px;
+  width: 35px;
+  background: url('../images/plus.png') no-repeat;
+  background-size: 65% 65%;
+  background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+  margin-right: 0.5rem;
+  float: right;
+}
+
+.chatArea {
+  padding: 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  height: 400px;
+  overflow-y: scroll;
+  width: 100%;
+}
+
+.scroll-skin .chatArea {
+  color: #6B6969;
+}
+
+.dark-skin .chatArea {
+  color: white;
+}
+
+#chat-messages { 
+	list-style-type: none; 
+	margin: 0; 
+	padding: 0; 
+}
+
+.log, .message {
+	display: block !important;
+}
+
+.log.error {
+	color: #F55C5C;
+}
+
+.messageBody {
+	margin-left: 0.5rem;
+}
+
+
+#canvas {
+	position: absolute;
+  width: 100%;
+  height: 100%;
+}
+
+.dark-skin #canvas {
+  background: url('../images/wallpaper.jpg') 0 0 no-repeat;
+  background-size: cover;
+}
+
+#pointers {
+  position: absolute;
+  z-index: 100000;
+}
+
+.pointer {
+  width: 10px;
+  height: 10px;
+  border-radius: 100px;
+  visibility: hidden;
+  z-index:10000;
+}
+
+.pointer .username {
+  margin-left: 1rem;
+}
+
+.red {
+  background-color: red;
+}
+
+.blue {
+  background-color: blue;
+}
+
+.yellow {
+  background-color: yellow;
+}
+
+.green {
+  background-color: green;
+}
+
+.white {
+  background-color: white;
+}
+
+.jp-audio {
+  display: block;
+  padding-left: 0.5rem;
+}
+
+.jp-play {
+	height: 45px;
+  width: 45px;
+	border: none;
+	background-size: 75% 75%;
+	background-position: center;
+  background-color: transparent;
+  background-repeat: no-repeat;
+	display: inline-block;
+}
+
+.jp-controls {
+  display: inline-block;
+}
+
+.jp-volume-controls {
+  display: inline-block;
+  vertical-align: top;
+}
+
+.play{background: url('../images/music-off.png') no-repeat;}
+.pause{background: url('../images/music-on.png') no-repeat;}
+
+
+.jp-play {
+  background-image: url('../images/music-off.png') }
+
+.jp-state-playing .jp-play {
+  background-image: url('../images/music-on.png')  }
+
+
+.jp-stop {
+  background-image: url('../images/music-on.png') }
+
+
+
+/*.jp-video .jp-volume-controls {
+  top: 12px;
+  left: 50px; }
+
+.jp-volume-controls button {
+  display: block;
+  position: absolute;
+  overflow: hidden;
+  text-indent: -9999px;
+  border: none;
+  cursor: pointer; }
+
+.jp-mute,
+.jp-volume-max {
+  width: 18px;
+  height: 15px; }
+
+.jp-volume-max {
+  left: 74px; }
+
+.jp-mute {
+  background: url("../image/jplayer.blue.monday.jpg") 0 -170px no-repeat; }
+
+.jp-state-muted .jp-mute {
+  background: url("../image/jplayer.blue.monday.jpg") -60px -170px no-repeat; }
+
+.jp-volume-max {
+  background: url("../image/jplayer.blue.monday.jpg") 0 -186px no-repeat; }*/
+
+
+
+.jp-volume-bar {
+    width: 60px;
+    height: 3px;
+    background-color: white;
+    display: inline-block;
+    margin-top: 20px;
+    vertical-align: top;
+}
+
+.jp-volume-bar-value {
+	height: 100%;
+    background-color: red;
+}
+
+
+/* Login Page */
+
+.login.page {
+  background-color: rgba(0, 0, 0, 0.5);
+  pointer-events: none;
+  height: 100%;
+	position: absolute;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+  z-index: 10;
+}
+
+.login.page .form {
+  height: 100px;
+  margin-top: -100px;
+  position: absolute;
+
+  text-align: center;
+  top: 50%;
+  width: 100%;
+}
+
+.login.page .form .usernameInput {
+  background-color: transparent;
+  border: none;
+  border-bottom: 2px solid #fff;
+  outline: none;
+  padding-bottom: 15px;
+  text-align: center;
+  width: 400px;
+}
+
+.login.page .title {
+  font-size: 200%;
+}
+
+.login.page .usernameInput {
+  font-size: 200%;
+  letter-spacing: 3px;
+}
+
+.login.page .title, .login.page .usernameInput {
+  color: #fff;
+  font-weight: 100;
+}
+
+
+#editbar {
+  background: transparent;
+  border: none;
+}
+
+#editbar .selected, .toolbar ul li a:hover {
+  background: transparent;
+  background-color: rgba(255, 253, 250, 0.53);
+  border-radius: 5px;
+}
+
+.toolbar ul li a {
+  border: none;
+  background: none;
+}
+
+iframe {
+      position: absolute;
+      z-index:10;
+}
+
+

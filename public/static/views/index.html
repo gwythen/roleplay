@@ -1,0 +1,188 @@
+<!doctype html>
+<html>
+  <head>
+    <link rel='stylesheet' href='/static/css/draw.css'>
+    <link rel='stylesheet' href='/static/css/farbtastic.css'>
+    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <title>The greatest roleplaying platform</title>
+  </head>
+  <body class="dark-skin">
+    <div id="wrapper">
+      <div id="header">
+        <div id="music-player">
+          <div id="jquery_jplayer_1" class="jp-jplayer"></div>
+          <div id="jp_container_1" class="jp-audio" role="application" aria-label="media player">
+            <div class="jp-type-single">
+              <div class="jp-gui jp-interface">
+                <div class="jp-controls">
+                  <button class="jp-play" role="button" tabindex="0"></button>
+                </div>
+                <div class="jp-volume-controls">
+                  <div class="jp-volume-bar">
+                    <div class="jp-volume-bar-value"></div>
+                  </div>
+                </div>
+              </div>
+              <div class="jp-no-solution">
+                <span>Update Required</span>
+                To play the media you will need to either update your browser to a recent version or update your <a href="http://get.adobe.com/flashplayer/" target="_blank">Flash plugin</a>.
+              </div>
+            </div>
+          </div>
+        </div>
+        <div id="drive-button"></div>
+      </div>
+      <div id="content">
+        <iframe id="google-drive" src="<%= googleDrive %>" frameborder="0"></iframe>
+        
+
+        <div id="chat">
+          <div class="chat-header">
+            <p class="chat-header-title">Chat</p>
+            <div class="icon-minim icon-minus"></div>
+          </div>
+          <div class="chatArea">
+            <ul class="chat-messages"></ul>
+          </div>
+          <div class="chat-footer">
+            <input class="inputMessage" placeholder="Type here..."/>
+          </div>
+        </div>
+
+
+        <div id="canvas">
+          <div id="pointers"></div>
+          <div id="editbar" class="toolbar">
+            <div id="overlay">
+                <div id="overlay-inner"></div>
+            </div>
+            <ul class="menu_right">
+                <!-- paint brush -->
+                <li class="acl-write" id="drawTool" data-key="draw">
+                    <a class="grouped-left" data-l10n-id="draw.toolbar.draw.title">
+                      <span class="buttonicon buttonicon-draw"></span>
+                    </a>
+                </li>
+                <!-- pencil brush -->
+                <li class="acl-write" id="pencilTool" data-key="pencil">
+                    <a class="grouped-middle" data-l10n-id="draw.toolbar.pencil.title">
+                      <span class="buttonicon buttonicon-pencil"></span>
+                    </a>
+                </li>
+                 <!-- Select Tool -->
+                <li class="acl-write" id="selectTool" data-key="select">
+                    <a class="grouped-middle" data-l10n-id="draw.toolbar.select.title">
+                      <span class="buttonicon buttonicon-select"></span>
+                    </a>
+                </li>
+                <!-- Goto to start of canvas -->
+                <li class="acl-write" id="textTool" data-key="text">
+                    <a class="grouped-middle" data-l10n-id="draw.toolbar.text.title" title="Insert textbox">
+                      <span class="buttonicon buttonicon-text"></span>
+                    </a>
+                </li>
+
+                <!-- color Selector Toggle -->
+                <li class="acl-write" id="colorToggle" data-key="color">
+                  <a class="grouped-middle" data-l10n-id="draw.toolbar.colorToggle.title">
+                    <span class="buttonicon buttonicon-color" style="opacity:0.5">
+                      <div style="display:inline-block;width:5px; height:16px; background-color:red;margin:0;padding:0;float:left"></div>
+                      <div style="display:inline-block;width:5px; height:16px; background-color:blue;margin:0;padding:0;float:left"></div>
+                      <div style="display:inline-block;width:5px; height:16px; background-color:green;margin:0;padding:0;float:left"></div>
+                    </span>
+                  </a>
+                </li>
+                <!-- Zero Tool -->
+                <li class="acl-write" id="zeroTool" data-key="zero">
+                    <a class="grouped-middle" data-l10n-id="draw.toolbar.zero.title">
+                      <span class="buttonicon buttonicon-zero"></span>
+                    </a>
+                </li>
+                <!-- Scale Tool -->
+                <li class="acl-write" id="scaleTool" data-key="scale">
+                    <a class="grouped-middle" data-l10n-id="draw.toolbar.scale.title">
+                      <span class="buttonicon buttonicon-scale"></span>
+                    </a>
+                </li>
+                <!-- Clear Tool -->
+                <li class="acl-write" id="clearImage" data-key="clear">
+                  <a class="grouped-middle" data-l10n-id="draw.settings.ClearCanvas" class="clearCanvasPrompt" title="Clear Drawing">
+                    <span class="buttonicon buttonicon-clearImage" style="background-color:transparent;background-image:none;border:dotted 1px black;margin:0;color:#000;height:16px;line-height:16px" >X</span>
+                  </a>
+                </li>
+
+                <!-- Upload -->
+                <li class="acl-write" id="uploadImage" data-key="upload">
+                    <a class="grouped-middle" data-l10n-id="draw.toolbar.upload.title" title="Upload an Image">
+                      <span class="buttonicon buttonicon-upload"></span>
+                    </a>
+                </li>
+                <!-- import export -->
+                <li data-key="import_export">
+                    <a id="importExport" class="grouped-right" data-l10n-id="draw.toolbar.import_export.title">
+                        <span class="buttonicon buttonicon-import_export"></span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+   
+        <div id="importexport" class="popup">
+            <h1 data-l10n-id="draw.importExport.import_export">Export</h1>
+            <div class="column">
+                <h2 data-l10n-id="draw.importExport.export"></h2>
+                <div><a id="exportSVG" target="_blank" class="exportlink">Export SVG</a></div>
+                <div><a id="exportPNG" target="_blank" class="exportlink">Export PNG</a></div>
+            </div>
+        </div>
+
+
+
+    <div id="lostConnection" class="hidden">
+        <p>Lost connection to the server! Please refresh this page.</p>
+    </div>
+    <div id="loading" class="hidden" style="display:block;">
+        <p>Loading existing sketch...  Click and hold to access the colour wheel</p>
+    </div>
+
+    <input type="file" id="imageInput" accept="image/*" />
+    <div id="activeColorSwatch"></div>
+    <div id="canvasContainer">
+      <canvas id="myCanvas" resize="true"></canvas>
+      <div id="mycolorpicker">
+        <div id="colorpickerMover"></div>
+        <div id="colorpicker"></div>
+        <div id="opacity">
+          <div id="opacityLabel">Opacity</div>
+          <input type="range" min="0" max="255" value="200" id="opacityRangeVal">
+        </div>
+      </div>
+
+    </div>
+
+
+
+        </div>
+      </div>
+    </div>
+    <div class="login page">
+      <div class="form">
+        <h3 class="title">What's your nickname?</h3>
+        <input class="usernameInput" type="text" maxlength="14" />
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src='/static/js/lib/jquery_browser.js'></script>
+    <script src='/static/js/lib/paper.js'></script>
+    <script src='/static/js/lib/webtoolkit.base64.js'></script>
+    <script src='/static/js/lib/farbtastic.js'></script>
+    <script src='/static/js/lib/jquery.pep.min.js'></script>
+    <script src='/static/js/draw.js' type="text/paperscript" canvas="myCanvas"></script>
+    <script>document.domain = document.domain;</script>
+    <script type="text/javascript" src="/static/js/lib/jquery.jplayer.js"></script>
+    <script type="text/javascript">
+      var AUDIO_STREAM = <%- JSON.stringify(audioStream) %>;
+    </script>
+    <script src="/static/js/app.js"></script>
+  </body>
+</html>
