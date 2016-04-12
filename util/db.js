@@ -54,7 +54,6 @@ exports.join = function(socket, room) {
         // We want the project to always only have one layer.
 
         project.project.activeLayer.remove();
-        console.log(value);
         project.project.importJSON(value.project);
         project.roomData = value.roomData;
         socket.emit('project:load', value.project);

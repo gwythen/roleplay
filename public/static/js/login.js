@@ -21,6 +21,9 @@ function joinRoom () {
 	  //socket.emit('add user', username, pwd, color, room);
 
 	  var jqxhr = $.post( "/login/" + room, { username: username, pwd: pwd, color: color})
+		  .done(function() {
+		  	location.reload();
+		  })
 		  .fail(function() {
 		    alert( "error" );
 		  });

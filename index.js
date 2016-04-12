@@ -57,13 +57,7 @@ app.get('/', function(req, res){
 });
 
 app.get('/:roomName', function(req, res) {
-  if(req.session[req.params.roomName] && req.session[req.params.roomName].authenticated) {
-    var session = req.session[req.params.roomName];
-    res.render('board.html', {room: req.params.roomName, user: session.user, userColor: session.color, googleDrive: settings.googleDriveFolder, audioStream: settings.audioStream});
-    console.log("User " + session.user + " entered room " + req.params.roomName);
-  } else {
-    res.render('login.html', {room: req.params.roomName});
-  }
+  requestBoardPage(req, res);
 });
 
 app.post('/login/:roomName', function(req, res) {
@@ -220,6 +214,16 @@ http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
+function requestBoardPage(req, res) {
+    if(req.session[req.params.roomName] && req.session[req.params.roomName].authenticated) {
+    var session = req.session[req.params.roomName];
+    res.render('board.html', {room: req.params.roomName, user: session.user, userColor: session.color, googleDrive: settings.googleDriveFolder, audioStream: settings.audioStream});
+    console.log("User " + session.user + " entered room " + req.params.roomName);
+  } else {
+    res.render('login.html', {room: req.params.roomName});
+  }
+}
+
 function loggedIn(req, res, data) {
   console.log("you're in!");
   // authenticated = true;
@@ -230,7 +234,7 @@ function loggedIn(req, res, data) {
   session[data.room].authenticated = true;
   session[data.room].user = data.username;
   session[data.room].color = data.color;
-  res.redirect('/'+ data.room);
+  requestBoardPage(req, res);
 };
 
 function login(req, res, data) {
