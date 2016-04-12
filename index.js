@@ -4,8 +4,10 @@ var http = require('http').Server(app);
 var io = require('socket.io')(http);
 var ejs = require('ejs');
 var url = require('url');
-
-var settings = require('./util/Settings.js'),
+var qs = require('querystring');
+var settings = require('./util/Settings.js');
+var session = require('express-session');
+var bodyParser  = require('body-parser'),
 tests = require('./util/tests.js'),
 draw = require('./util/draw.js'),
 projects = require('./util/projects.js'),
@@ -21,6 +23,12 @@ app.set('views', __dirname + '/public/static/views');
 app.engine('html', require('ejs').renderFile);
 app.set('view engine', 'html');
 
+app.use(session({
+  secret: 'roleplay',
+  resave: false,
+  saveUninitialized: true
+}))
+
 
 /** 
  * Build Client Settings that we will send to the client
@@ -29,24 +37,48 @@ var clientSettings = {
   "tool": settings.tool
 }
 
-var numUsers = 0;;
+var numUsers = 0;
 
-// app.get('/', function(req, res){
-//   res.render('index.html', {googleDrive: settings.googleDriveFolder, audioStream: settings.audioStream});
-// });
+app.use(function(req, res, next) {
+   if(req.url.substr(-1) == '/' && req.url.length > 1)
+       res.redirect(301, req.url.slice(0, -1));
+   else
+       next();
+});
+
+app.use(bodyParser.urlencoded({
+  extended: true
+}));
+
+app.use(bodyParser.json());
 
 app.get('/', function(req, res){
   res.render('index.html');
 });
+
 app.get('/:roomName', function(req, res) {
-  res.render('board.html', {googleDrive: settings.googleDriveFolder, audioStream: settings.audioStream});
-  console.log("room is set to " + req.params.roomName);
+  if(req.session[req.params.roomName] && req.session[req.params.roomName].authenticated) {
+    var session = req.session[req.params.roomName];
+    res.render('board.html', {room: req.params.roomName, user: session.user, userColor: session.color, googleDrive: settings.googleDriveFolder, audioStream: settings.audioStream});
+    console.log("User " + session.user + " entered room " + req.params.roomName);
+  } else {
+    res.render('login.html', {room: req.params.roomName});
+  }
 });
 
-
+app.post('/login/:roomName', function(req, res) {
+    //test for login, if good redirect to roomname
+    console.log("joining room");
+    login(req, res, {room: req.params.roomName, pwd: req.body.pwd, color: req.body.color, username: req.body.username});
+});
 
 io.on('connection', function(socket) {
   var addedUser = false;
+
+  socket.on('create:room', function(room, pwd) {
+    console.log("create room requested");
+    db.checkAndCreateRoom(room, pwd, socket);
+  });
 
   // when the client emits 'new message', this listens and executes
   socket.on('new message', function (data) {
@@ -57,15 +89,15 @@ io.on('connection', function(socket) {
     });
   });
 
-  // when the client emits 'add user', this listens and executes
-  socket.on('add user', function (username, color) {
-    if (addedUser) return;
 
+  socket.on('add user', function(data) {
     // we store the username in the socket session for this client
-    socket.username = username;
-    socket.usercolor = color;
+    if (addedUser) return;
+    socket.username = data.user;
+    socket.usercolor = data.color;
     ++numUsers;
     addedUser = true;
+    joinRoom(socket, data.room);
     socket.emit('login', {
       numUsers: numUsers
     });
@@ -74,7 +106,7 @@ io.on('connection', function(socket) {
       username: socket.username,
       numUsers: numUsers
     });
-    startDrawing(socket, {room: "room"});
+    
   });
 
   // when the client emits 'typing', we broadcast it to others
@@ -188,10 +220,25 @@ http.listen(3000, function(){
   console.log('listening on *:3000');
 });
 
-// Subscribe a client to a room
-function startDrawing(socket, data) {
-  var room = data.room;
+function loggedIn(req, res, data) {
+  console.log("you're in!");
+  // authenticated = true;
+  // we store the username in the session for this client
+  var session = req.session;
+  session[data.room] = {};
 
+  session[data.room].authenticated = true;
+  session[data.room].user = data.username;
+  session[data.room].color = data.color;
+  res.redirect('/'+ data.room);
+};
+
+function login(req, res, data) {
+  db.login(req, res, data, loggedIn);
+}
+
+// Subscribe a client to a room
+function joinRoom(socket, room) {
   // If the close timer is set, cancel it
   // if (closeTimer[room]) {
   //  clearTimeout(closeTimer[room]);
@@ -209,22 +256,22 @@ function startDrawing(socket, data) {
     // canvas.
     projects.projects[room].project = new paper.Project();
     projects.projects[room].external_paths = {};
-    db.load(room, socket);
+    db.join(socket, room);
   } else { // Project exists in memory, no need to load from database
     loadFromMemory(room, socket);
   }
-}
+};
 
 // Send current project to new client
 function loadFromMemory(room, socket) {
   var project = projects.projects[room].project;
   if (!project) { // Additional backup check, just in case
-    db.load(room, socket);
+    db.join(socket, room);
     return;
   }
   socket.emit('loading:start');
   var value = project.exportJSON();
-  socket.emit('project:load', {project: value});
+  socket.emit('project:load', value);
   socket.emit('settings', clientSettings);
   socket.emit('loading:end');
 }

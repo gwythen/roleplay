@@ -3,7 +3,7 @@
   <head>
     <link rel='stylesheet' href='/static/css/draw.css'>
     <link rel='stylesheet' href='/static/css/farbtastic.css'>
-    <link rel="stylesheet" type="text/css" href="static/css/style.css">
+    <link rel="stylesheet" type="text/css" href="/static/css/style.css">
     <title>The greatest roleplaying platform</title>
   </head>
   <body class="dark-skin">
@@ -159,17 +159,10 @@
 
     </div>
 
-
-
         </div>
       </div>
     </div>
-    <div class="login page" id="login">
-      <div class="form">
-        <h3 class="title">What's your nickname?</h3>
-        <input class="usernameInput" id="usernameInput" type="text" maxlength="14" />
-      </div>
-    </div>
+
     <script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
     <script src="/socket.io/socket.io.js"></script>
     <script src='/static/js/lib/jquery_browser.js'></script>
@@ -177,12 +170,17 @@
     <script src='/static/js/lib/webtoolkit.base64.js'></script>
     <script src='/static/js/lib/farbtastic.js'></script>
     <script src='/static/js/lib/jquery.pep.min.js'></script>
-    <script src='/static/js/draw.js' type="text/paperscript" canvas="myCanvas"></script>
     <script>document.domain = document.domain;</script>
     <script type="text/javascript" src="/static/js/lib/jquery.jplayer.js"></script>
     <script type="text/javascript">
       var AUDIO_STREAM = <%- JSON.stringify(audioStream) %>;
+      var USER_NAME = <%- JSON.stringify(user) %>;
+      var USER_COLOR = <%- JSON.stringify(userColor) %>;
+      var ROOM = <%- JSON.stringify(room) %>;
+      var socket = io();
     </script>
+    <script src='/static/js/draw.js' type="text/paperscript" canvas="myCanvas"></script>
     <script src="/static/js/app.js"></script>
+    
   </body>
 </html>

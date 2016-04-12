@@ -11,14 +11,16 @@ var jsonminify = require('jsonminify');
 exports.defaults = {
   //IP and port to bind to
   "ip": "0.0.0.0",
-  "port" : 3000,
+  "port" : 27017,
   //The Type of the database. You can choose between dirty, postgres, sqlite and mysql
   //You shouldn't use "dirty" for for anything else than testing or development
-  "dbType" : "dirty",
+  "dbType" : "mongodb",
   //the database specific settings
   "dbSettings" : {
-                   "filename" : "var/dirty.db"
-                 },
+    "dbname": "roleplaydb",
+    "port": 27017,
+    "host": "localhost"
+  },
   "ssl": false,
   "tool": "pencil",
   "googleDriveFolder": "",

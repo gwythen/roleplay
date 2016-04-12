@@ -1,7 +1,6 @@
-var socket = io();
-
 $(document).ready(function(){
 
+  // socket.emit('add user', {user: USER_NAME, color: USER_COLOR, room: ROOM});
   var stream = {
     title: "Roleplay",
     mp3: AUDIO_STREAM
@@ -49,8 +48,6 @@ $(document).ready(function(){
       playing = false;
       $("#jquery_jplayer_1").jPlayer("clearMedia");
     }
-
-
   });
 
 });
@@ -82,21 +79,23 @@ $(document).on('click', '.icon-minim', function (e) {
 
   // Initialize variables
   var $window = $(window);
-  var $usernameInput = $('#usernameInput'); // Input for username
   var $messages = $('.chat-messages'); // Messages area
   var $inputMessage = $('.inputMessage'); // Input message input box
-
-  var $loginPage = $('#login'); // The login page
   var $chatPage = $('#chat'); // The chatroom page
-
-  // Prompt for setting a username
-  var username;
   var connected = false;
   var typing = false;
   var lastTypingTime;
-  var $currentInput = $usernameInput.focus();
+  var username = USER_NAME;
+  var $currentInput = $inputMessage.focus();
 
-  var socket = io();
+  $inputMessage.on('input', function() {
+    updateTyping();
+  });
+
+  // Focus input when clicking on the message input's border
+  $inputMessage.click(function () {
+    $inputMessage.focus();
+  });
 
   function addParticipantsMessage (data) {
     var message = '';
@@ -108,21 +107,7 @@ $(document).on('click', '.icon-minim', function (e) {
     log(message);
   }
 
-  // Sets the client's username
-  function setUsername () {
-    username = cleanInput($usernameInput.val().trim());
-    var color = getUsernameColor(username);
-    // If the username is valid
-    if (username) {
-      $loginPage.fadeOut();
-      $chatPage.show();
-      $loginPage.off('click');
-      $currentInput = $inputMessage.focus();
 
-      // Tell the server your username
-      socket.emit('add user', username, color);
-    }
-  }
 
   function parseCommand (message) {
   	var command = message.split("#")[1];
@@ -328,29 +313,9 @@ $(document).on('click', '.icon-minim', function (e) {
     }
   });
 
-  $usernameInput.keydown(function(event) {
-    if (event.which === 13) {
-        setUsername();
-    }
-  });
-
-  $inputMessage.on('input', function() {
-    updateTyping();
-  });
-
-  // Click events
-
-  // Focus input when clicking anywhere on login page
-  $loginPage.click(function () {
-    $currentInput.focus();
-  });
-
-  // Focus input when clicking on the message input's border
-  $inputMessage.click(function () {
-    $inputMessage.focus();
-  });
-
   // Socket events
+
+  
 
   // Whenever the server emits 'login', log the login message
   socket.on('login', function (data) {
@@ -390,3 +355,8 @@ $(document).on('click', '.icon-minim', function (e) {
   socket.on('stop typing', function (data) {
     removeChatTyping(data);
   });
+
+  socket.on('loading:end', function() {
+    console.log("loading:end");
+  });
+

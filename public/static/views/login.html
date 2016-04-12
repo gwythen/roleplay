@@ -1,0 +1,24 @@
+ <!doctype html>
+<html>
+  <head>
+    <link rel="stylesheet" type="text/css" href="/static/css/login.css">
+    <title>The greatest roleplaying platform</title>
+  </head>
+  <body class="dark-skin login page">
+    <div class="form-container" id="login">
+      <div class="form">
+        <h3 class="title">Character Name</h3>
+        <input class="usernameInput" id="usernameInput" type="text" maxlength="14" />
+        <h3 class="title">Password</h3>
+        <input class="usernameInput" id="pwdInput" type="password" maxlength="14" />
+        <button class="login-button" type="submit">Enter Room</button>
+      </div>
+    </div>
+    <script src="https://code.jquery.com/jquery-2.2.2.min.js"   integrity="sha256-36cp2Co+/62rEAAYHLmRCPIych47CvdM+uTBJwSzWjI="   crossorigin="anonymous"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/static/js/login.js"></script>
+    <script type="text/javascript">
+      var ROOM = <%- JSON.stringify(room) %>;
+    </script>
+  </body>
+</html>

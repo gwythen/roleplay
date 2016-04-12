@@ -3,7 +3,7 @@
 tool.minDistance = 10;
 tool.maxDistance = 45;
 
-var room = "room";
+var room = ROOM;
 
 function pickColor(color) {
   $('#color').val(color);
@@ -240,6 +240,8 @@ function scrolled(x, y, delta) {
 
 
 $('#activeColorSwatch').css('background-color', $('.colorSwatch.active').css('background-color'));
+
+socket.emit('add user', {user: USER_NAME, color: USER_COLOR, room: ROOM});
 
 // Random User ID
 // Used when sending data
@@ -988,7 +990,7 @@ socket.on('user:disconnect', function(user_count) {
 socket.on('project:load', function(json) {
   console.log("project:load");
   paper.project.activeLayer.remove();
-  paper.project.importJSON(json.project);
+  paper.project.importJSON(json);
 
   // Make color selector draggable
   $('#mycolorpicker').pep({});
@@ -1012,11 +1014,12 @@ socket.on('canvas:clear', function() {
 });
 
 socket.on('loading:start', function() {
-  // console.log("loading:start");
+  console.log("loading:start");
   $('#loading').show();
 });
 
 socket.on('loading:end', function() {
+  console.log("loading:end");
   $('#loading').hide();
   $('#colorpicker').farbtastic(pickColor); // make a color picker
   // cake

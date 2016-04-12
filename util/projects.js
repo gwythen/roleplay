@@ -1,2 +1,3 @@
+//paper projects
 exports.projects = {};
 
